@@ -22,11 +22,11 @@ class LocationRepository {
   }
 
   func stopTracking() {
-      dataSource.stopUpdatingLocation()
+    dataSource.stopUpdatingLocation()
   }
 }
 
-extension LocationRepository : LocationDataSourceDelegate {
+extension LocationRepository: LocationDataSourceDelegate {
 
   func didUpdateLocation(latitude: Double, longitude: Double, speed: Double) {
     delegate?.didUpdateLocation(latitude: latitude, longitude: longitude, speed: speed)
