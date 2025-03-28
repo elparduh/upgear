@@ -8,7 +8,7 @@ class LocationDataSource {
   private let locationManager: LocationManager
   weak var delegate: LocationDataSourceDelegate?
 
-  init(locationManager: LocationManager = .shared) {
+  init(locationManager: LocationManager) {
     self.locationManager = locationManager
 
     self.locationManager.onLocationUpdate = { [weak self] location in
