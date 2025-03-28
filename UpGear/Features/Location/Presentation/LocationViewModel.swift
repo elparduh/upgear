@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 @MainActor
 class LocationViewModel: ObservableObject {
@@ -34,5 +35,11 @@ class LocationViewModel: ObservableObject {
 
   func stopTracking() {
     getLocationUseCase.stop()
+  }
+
+  func openSettings() {
+    if let url = URL(string: UIApplication.openSettingsURLString) {
+      UIApplication.shared.open(url)
+    }
   }
 }
