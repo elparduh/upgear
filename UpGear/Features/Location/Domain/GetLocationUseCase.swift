@@ -2,7 +2,7 @@ class GetLocationUseCase {
   private let repository: LocationRepository
   var onLocationUpdated: ((Double, Double, Double) -> Void)?
   var onError: ((Error) -> Void)?
-  var onDenyPermission: (() -> Void)?
+  var onPermissionDenied: (() -> Void)?
 
   init(repository: LocationRepository) {
     self.repository = repository
@@ -31,6 +31,6 @@ extension GetLocationUseCase : LocationRepositoryDelegate {
   }
   
   func didDenyPermission() {
-    onDenyPermission?()
+    onPermissionDenied?()
   }
 }
