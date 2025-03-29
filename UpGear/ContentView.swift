@@ -18,16 +18,16 @@ struct ContentView: View {
         .padding()
 
       Text("\(viewModel.currentGear)")
-        .font(.system(size: 60, weight: .bold, design: .rounded))
+        .font(.system(size: 120, weight: .bold, design: .rounded))
         .padding()
 
-      Button("Iniciar Seguimiento") {
+      /*Button("Iniciar Seguimiento") {
         viewModel.startTracking()
       }
 
       Button("Detener Seguimiento") {
         viewModel.stopTracking()
-      }
+      }*/
     }
     .padding()
     .alert("Permiso de Ubicación Requerido", isPresented: $viewModel.showPermissionAlert) {
