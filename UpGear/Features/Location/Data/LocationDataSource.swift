@@ -1,5 +1,5 @@
 protocol LocationDataSourceDelegate: AnyObject {
-  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double)
+  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double, currentGear: Int)
   func didFailWithError(error: Error)
   func didDenyPermission()
 }
@@ -11,12 +11,12 @@ class LocationDataSource {
   init(locationManager: LocationManager) {
     self.locationManager = locationManager
 
-    self.locationManager.onLocationUpdate = { [weak self] location in
-      let speed = location.speed >= 0 ? location.speed : 0.0
+    self.locationManager.onLocationUpdate = { [weak self] location, speedValue, currentGear in
       self?.delegate?.didUpdateLocation(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude,
-        speed: speed
+        speed: speedValue,
+        currentGear: currentGear
       )
     }
 

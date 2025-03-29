@@ -1,5 +1,5 @@
 protocol LocationRepositoryDelegate: AnyObject {
-  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double)
+  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double, currentGear: Int)
   func didFailWithError(error: Error)
   func didDenyPermission()
 }
@@ -28,8 +28,8 @@ class LocationRepository {
 
 extension LocationRepository: LocationDataSourceDelegate {
 
-  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double) {
-    delegate?.didUpdateLocation(latitude: latitude, longitude: longitude, speed: speed)
+  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double, currentGear: Int) {
+    delegate?.didUpdateLocation(latitude: latitude, longitude: longitude, speed: speed, currentGear: currentGear)
   }
 
   func didFailWithError(error: any Error) {
