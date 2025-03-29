@@ -13,7 +13,10 @@ struct ContentView: View {
 
   var body: some View {
     VStack(spacing: 20) {
-      Text("Velocidad: \(viewModel.speed, specifier: "%.0f") km/h")
+      Text("\(viewModel.speed, specifier: "%.0f") km/h")
+        .font(.system(size: 60, weight: .bold, design: .rounded))
+        .foregroundColor(viewModel.speed > 80 ? .red : .green)
+        .padding()
 
       Button("Iniciar Seguimiento") {
         viewModel.startTracking()
