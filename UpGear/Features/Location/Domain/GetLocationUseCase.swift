@@ -1,6 +1,6 @@
 class GetLocationUseCase {
   private let repository: LocationRepository
-  var onLocationUpdated: ((Double, Double, Double) -> Void)?
+  var onLocationUpdated: ((Double, Double, Double, Int) -> Void)?
   var onError: ((Error) -> Void)?
   var onPermissionDenied: (() -> Void)?
 
@@ -22,8 +22,8 @@ class GetLocationUseCase {
 
 extension GetLocationUseCase : LocationRepositoryDelegate {
 
-  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double) {
-    onLocationUpdated?(latitude, longitude, speed)
+  func didUpdateLocation(latitude: Double, longitude: Double, speed: Double, currentGear: Int) {
+    onLocationUpdated?(latitude, longitude, speed, currentGear)
   }
   
   func didFailWithError(error: any Error) {

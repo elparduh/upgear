@@ -15,7 +15,10 @@ struct ContentView: View {
     VStack(spacing: 20) {
       Text("\(viewModel.speed, specifier: "%.0f") km/h")
         .font(.system(size: 60, weight: .bold, design: .rounded))
-        .foregroundColor(viewModel.speed > 80 ? .red : .green)
+        .padding()
+
+      Text("\(viewModel.currentGear)")
+        .font(.system(size: 60, weight: .bold, design: .rounded))
         .padding()
 
       Button("Iniciar Seguimiento") {
