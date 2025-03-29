@@ -11,12 +11,11 @@ class LocationDataSource {
   init(locationManager: LocationManager) {
     self.locationManager = locationManager
 
-    self.locationManager.onLocationUpdate = { [weak self] location in
-      let speed = location.speed >= 0 ? location.speed : 0.0
+    self.locationManager.onLocationUpdate = { [weak self] location, speedValue in
       self?.delegate?.didUpdateLocation(
         latitude: location.coordinate.latitude,
         longitude: location.coordinate.longitude,
-        speed: speed
+        speed: speedValue
       )
     }
 

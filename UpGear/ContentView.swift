@@ -13,8 +13,6 @@ struct ContentView: View {
 
   var body: some View {
     VStack(spacing: 20) {
-      Text("Latitud: \(viewModel.latitude)")
-      Text("Longitud: \(viewModel.longitude)")
       Text("Velocidad: \(viewModel.speed, specifier: "%.0f") km/h")
 
       Button("Iniciar Seguimiento") {

@@ -3,18 +3,19 @@ import CoreLocation
 class LocationManager: NSObject, CLLocationManagerDelegate {
 
   static let shared = LocationManager()
+  private var previousSpeed: Double = 0.0
 
   private let locationManager = CLLocationManager()
   var onPermissionDenied: (() -> Void)?
   var onPermissionGranted: (() -> Void)?
-  var onLocationUpdate: ((CLLocation) -> Void)?
+  var onLocationUpdate: ((CLLocation, Double) -> Void)?
   var onError: ((Error) -> Void)?
 
   private override init() {
     super.init()
     locationManager.delegate = self
     locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-    locationManager.distanceFilter = kCLDistanceFilterNone
+    locationManager.distanceFilter = 1
     locationManager.allowsBackgroundLocationUpdates = true
     locationManager.pausesLocationUpdatesAutomatically = false
   }
@@ -47,8 +48,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   }
 
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    guard let location = locations.last else { return }
-    onLocationUpdate?(location)
+    guard let newLocation = locations.last else { return }
+
+    let newSpeed = max(0, newLocation.speed)
+    if abs(newSpeed - previousSpeed) > 10 { return }
+
+    previousSpeed = newSpeed
+    onLocationUpdate?(newLocation, newSpeed)
   }
 
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
